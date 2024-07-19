@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your_Brain</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .calculator {
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 700px;
+            height: 500px;
+            display: grid;
+
+
+        }
+
+        .display {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 20px;
+            font-size: 2em;
+            border-bottom: 1px solid #444;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .btn {
+            background-color: #444;
+            border: 1px solid #555;
+            color: #fff;
+            font-size: 1.5em;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .span{
+            grid-column: span 2;
+        }
+        .col{
+            color: rgba(241, 197, 35, 0.803);
+        }
+        .r{
+            color: rgba(165, 17, 17, 0.825);
+        }
+        
+
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="btn r" onclick="clear_Display()">AC</button>
+            <button class="btn col r" onclick="DEL()">DEL</button>
+            <button class="btn col" onclick="appendToDisplay('/')">/</button>
+            <button class="btn col" onclick="appendToDisplay('*')">*</button>
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn col" onclick="appendToDisplay('-')">-</button>
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn col" onclick="appendToDisplay('+')">+</button>
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn col" onclick="appendToDisplay('00')">00</button>
+            <button class="btn" onclick="appendToDisplay('0')">0</button>
+            <button class="btn col" onclick="appendToDisplay('.')">.</button>
+            <button class="btn span col g" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <script>
+        function DEL(){
+            const display = document.getElementById('display');
+            display.innerText = display.innerText.slice(0, -1);
+            if (display.innerText === '') {
+                display.innerText = '0';
+            }
+        }
+        function clear_Display() {
+            document.getElementById('display').innerText =display.innerText= '0';
+        }
+
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
